@@ -9,7 +9,7 @@ export const TaskClient = ({ data, setShowModal }) => {
     const [dataFiltered, setDataFiltered] = useState(data);
     const [status, setStatus] = useState('active');
 
-    const searchKeys = ['taskName', 'date', 'status'];
+    const searchKeys = [{taskName: {name: 'Task Name', value: 'taskName'}}, {date: {name: 'Date', value: 'date'}}, {status: {name: 'Status', value: 'status'}}];
 
     const filterByStatus = (status) => {
         const filtered = data?.filter(task => task.status === status);
