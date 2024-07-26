@@ -47,13 +47,18 @@ export function DataTable({ columns, data, searchKey, searchKeys }) {
         <select
           value={actualSearchKey}
           onChange={(e) => setActualSearchKey(e.target.value)}
-          className="h-10 rounded-md border border-input text-sm"
+          className="h-10 rounded-md border border-input text-sm w-[100px]"
         >
-          {searchKeys?.map((key) => (
-            <option key={key} value={key}>
-              {key}
-            </option>
-          ))}
+          {
+            searchKeys.map((option, index) => {
+              const key = Object.keys(option)[0];
+              const { name, value } = option[key];
+              
+              return(
+                <option key={index} value={value}>{name}</option>
+              )
+            })
+          }
         </select>
       </div>
       <div className="rounded-md border">
