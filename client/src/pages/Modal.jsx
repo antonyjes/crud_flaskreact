@@ -4,11 +4,60 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const ModalTask = ({showModal, setShowModal, operation, currentTask=[]}) => {
-    const [taskName, setTaskName] = useState(currentTask.taskName);
-    const [date, setDate] = useState(currentTask.date);
-    const [status, setStatus] = useState(currentTask.status);    
+    const [taskName, setTaskName] = useState(currentTask.taskName || '');
+    const [date, setDate] = useState(currentTask.date || '');
+    const [status, setStatus] = useState(currentTask.status || '');    
+
+    const createTask = async () => {
+        const createdTask = await fetch('http://localhost:3003/tasks/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                taskName: taskName,
+                date: date,
+                status: status
+            })
+        });
+
+        const savedTask = await createdTask.json();
+
+        if(savedTask) {
+            toast.success("Task created successfully");
+            setShowModal(false);
+        }
+    }
+
+    const editTask = async () => {
+        const editedTask = await fetch(`http://localhost:3003/tasks/${currentTask.id}/edit`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                taskName: taskName,
+                date: date,
+                status: status
+            })
+        });
+
+        const savedTask = await editedTask.json();
+
+        if(savedTask) {
+            toast.success("Task edited successfully");
+            setShowModal(false);
+        }
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (operation === "Create") await createTask();
+        if (operation === "Edit") await editTask();
+    }
 
     return(
         <Dialog open={showModal} onOpenChange={setShowModal}>
@@ -17,7 +66,7 @@ const ModalTask = ({showModal, setShowModal, operation, currentTask=[]}) => {
                     <DialogTitle>{operation}</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4 py-2 pb-4 mt-2">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="grid gap-1 mb-4">
                             <Label>Task</Label>
                             <Input type="text" value={taskName} onChange={(e) => setTaskName(e.target.value)} />
