@@ -17,7 +17,7 @@ export const CellAction = ({ data }) => {
   const [showAlert, setShowAlert] = useState(false);
 
   const onDelete = async () => {
-    await fetch(`http://localhost:3003/tasks/${data.id}/delete`, {
+    await fetch(`http://localhost:3003/api/tasks/${data.id}/delete`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

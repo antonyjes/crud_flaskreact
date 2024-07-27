@@ -12,7 +12,7 @@ const ModalTask = ({showModal, setShowModal, operation, currentTask=[]}) => {
     const [status, setStatus] = useState(currentTask.status || '');    
 
     const createTask = async () => {
-        const createdTask = await fetch('http://localhost:3003/tasks/create', {
+        const createdTask = await fetch('http://localhost:3003/api/tasks/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ const ModalTask = ({showModal, setShowModal, operation, currentTask=[]}) => {
     }
 
     const editTask = async () => {
-        const editedTask = await fetch(`http://localhost:3003/tasks/${currentTask.id}/edit`, {
+        const editedTask = await fetch(`http://localhost:3003/api/tasks/${currentTask.id}/edit`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
