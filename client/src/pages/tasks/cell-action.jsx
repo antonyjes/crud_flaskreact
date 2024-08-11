@@ -26,6 +26,7 @@ export const CellAction = ({ data }) => {
 
     toast.success("Task deleted successfully");
     setShowAlert(false);
+    window.location.reload();
   };
 
   return (
