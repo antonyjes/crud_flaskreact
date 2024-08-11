@@ -45,6 +45,7 @@ const ModalTask = ({
     if (savedTask) {
       toast.success("Task created successfully");
       setShowModal(false);
+      window.location.reload();
     }
   };
 
@@ -69,6 +70,7 @@ const ModalTask = ({
     if (savedTask) {
       toast.success("Task edited successfully");
       setShowModal(false);
+      window.location.reload();
     }
   };
 
