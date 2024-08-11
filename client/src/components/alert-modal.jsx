@@ -10,7 +10,7 @@ export const AlertModal = ({showAlert, setShowAlert, onConfirm}) => {
                     <DialogDescription>This action cannot be undone.</DialogDescription>
                 </DialogHeader>
                 <div className="pt-6 space-x-2 flex items-center justify-end w-full">
-                    <Button variant="destructive" onClick={() => setShowAlert(false)}>
+                    <Button onClick={() => setShowAlert(false)}>
                         Cancel
                     </Button>
                     <Button variant="destructive" onClick={onConfirm}>
