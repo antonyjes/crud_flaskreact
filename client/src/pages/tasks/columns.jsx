@@ -1,3 +1,5 @@
+import { CellAction } from "./cell-action";
+
 export const columns = [
     {
         accessorKey: 'id',
@@ -17,6 +19,6 @@ export const columns = [
     },
     {
         id: 'actions',
-        cell: null,
+        cell: ({ row }) => <CellAction data={row.original} />,
     }
 ]
